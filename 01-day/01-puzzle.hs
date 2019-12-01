@@ -1,12 +1,12 @@
-parseFloat :: String -> Float
-parseFloat s = read s :: Float
+parseInt :: String -> Integer
+parseInt s = read s :: Integer
 
-calcFuel :: Float -> Integer
-calcFuel x = floor (x / 3) - 2
+calcFuel :: (Real a, Integral b) => a -> b
+calcFuel x = floor (realToFrac x / 3) - 2
 
 main = do
     contents <- readFile "01-input.txt"
-    let modules = map parseFloat (lines contents)
+    let modules = map parseInt (lines contents)
         requiredFuel = map calcFuel modules
         result = sum requiredFuel
     putStrLn (show result)
